@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import datetime as dt
 
 def home(request):
-    return HttpResponse('Home is where the heart is')
+    date = dt.date.today()
+    return render(request, 'home.html', {'date':date})
