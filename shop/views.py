@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime as dt
 from .models import Image
-
+from .forms import NewsLetterForm
 
 def home(request):
     date = dt.date.today()
@@ -12,7 +12,14 @@ def home(request):
 
 def shop(request):
 
-    return render(request, 'shop.html')
+    if request.method == 'POST':
+        form = NewsLetterForm(request.POST)
+        if form.is_valid():
+            print('valid')
+    else:
+        form = NewsLetterForm()
+
+    return render(request, 'shop.html', {'letterForm':form})
 
 def search_results(request):
 
