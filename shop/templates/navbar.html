@@ -1,48 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{%url 'home'%}" style="font-size:30px;">The Jewel Shop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'about' %}">About Us<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Shop
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Necklaces</a>
-                <a class="dropdown-item" href="#">Bracelets</a>
-                <a class="dropdown-item" href="#">Earrings</a>
-                <a class="dropdown-item" href="#">Rings</a>
 
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Stuff on sale</a>
-                
-              </div>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link disabled" href="#">Disabled</a> -->
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="{%url 'home'%}" style="font-size:30px;">The Jewel Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about' %}">About Us<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Shop
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Necklaces</a>
+            <a class="dropdown-item" href="#">Bracelets</a>
+            <a class="dropdown-item" href="#">Earrings</a>
+            <a class="dropdown-item" href="#">Rings</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Stuff on sale</a>
+
+          </div>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link disabled" href="#">Disabled</a> -->
+        </li>
+      </ul>
+      <!-- search form -->
+      <form role="search" action="{% url 'search_results' %}">
+        <input type="search" placeholder="Search" name="...">
+      </form>
+
+      <!-- login -->
+          {% if user.is_authenticated %}
+          <ul style="    list-style-type: none;">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false" style="border:none; color:grey; background-color:darkgrey; padding:20px; margin:4px 2px; border-radius:10em;">Account
+                        <span class="caret"></span>
+                    </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="{%url 'shop'%}">Home</a>
+                </li>
+                <li>
+                  <a href="/accounts/password/change">Change Password</a>
+                </li>
+                <li>
+                  <a href="/logout">Logout</a>
+                </li>
+              </ul>
             </li>
           </ul>
-          <form role="search" action="{% url 'search_results' %}">
-              <input type="search" placeholder="Search" name="...">
-            </form>
-        </div>
-      </nav>
+          {% else %}
+          <li>
+            <a class='btn btn-default' href="/accounts/login">Login</a>
+          </li>
+          {% endif %}
+
+    </div>
+  </nav>
 </body>
+
 </html>

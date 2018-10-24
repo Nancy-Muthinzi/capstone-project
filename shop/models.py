@@ -54,7 +54,43 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-   
+
+class Cart(models.Model):
+    user = models.ForeignKey(User)
+    active = models.BooleanField(default=True)
+    order_date = models.DateField(null=True)
+    payment_type = models.CharField(max_length=100, null=True)
+    payment_id = models.CharField(max_length=100, null=True)
+
+    def __unicode__(self): 
+            return "%s" % (self.user)
+
+    def add_to_cart(self, jewel_id):
+        jewel = Jewel.objects.get(pk=jewel_id)
+        try:
+            preexisting_order = JewelOrder.objects.get(jewel=jewel, cart=self)
+            preexisting_order.quantity += 1
+            preexisting_order.save()
+        except JewelOrder.DoesNotExist:
+            new_order = JewelOrder.objects.create(
+                jewel=jewel,
+                cart=self,
+                quantity=1
+                )
+            new_order.save()
+
+
+    def remove_from_cart(self, jewel_id):
+        jewel = Jewel.objects.get(pk=jewel_id)
+        try:
+            preexisting_order = JewelOrder.objects.get(jewel=jewel, cart=self)
+            if preexisting_order.quantity > 1:
+                preexisting_order.quantity -= 1
+                preexisting_order.save()
+            else:
+                preexisting_order.delete()
+        except JewelOrder.DoesNotExist:
+            pass   
 
 class Blog(models.Model):
     author = models.ForeignKey(User)
