@@ -61,3 +61,7 @@ class Blog(models.Model):
     date = models.DateField()
     title = models.CharField(max_length=100)
     post = models.TextField()
+
+class NewsLetterRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
