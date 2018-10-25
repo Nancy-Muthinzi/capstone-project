@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{{block.super}}
+
+{{mesage}}
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <p>{{ object.name }}</p>
+        <p>Price: ${{object.price }}</p>
+        {% if object in user.profile.jewels.all %}
+
+        Products ordered
+        {% elif object in current_order_products %}
+        <a href="{% url 'shopping_cart:order_summary' %}" class='btn btn-warning'>Add to Cart</a>
+        {% else %}
+        <a href="{% url 'shopping_cart:add_to_cart' object.id %}" class='btn btn-warning'>Add to Cart</a>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

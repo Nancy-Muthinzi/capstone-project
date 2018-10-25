@@ -16,18 +16,19 @@ html {
 }
 #about {
   text-align: center;
-  color: floralwhite;
-  background-color: black;
+  color: rosybrown;
+  /* background-color: black; */
 }
 #blog {
   text-align: center;
   color: floralwhite;
   background-color: black;
 }
-#shop {
+#collection {
   text-align: center;
-  color: floralwhite;
-  background-color: black;
+  font-size: 16px;
+  color: black;
+  /* background-color: black; */
 }
 input {
   outline: none;

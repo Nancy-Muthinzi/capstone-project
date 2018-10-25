@@ -3,22 +3,22 @@
 <div class="container">
 
   <div class="row">
-    {% if images %}
-      <h2>Found {{ images|length }} of searched term {{message}}</h2>
+    {% if items %}
+      <h2>Found {{ items|length }} of searched term {{message}}</h2>
     {% else %}
-      <h2> Found 0 images for the search term {{message}}</h2>
+      <h2> Found 0 items for the search term {{message}}</h2>
     {% endif %}
 
   </div>
 
   <div class="row">
 
-  {% if images %}
-    {% for image in images %}
+  {% if items %}
+    {% for item in items %}
       <div class="col-md-3">
           <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal{{post.id}}">
-          <img src="{{image.image.url}}" alt="" width="150">
-          <h3>{{image.image_name}}</h3>
+          <img src="{{item.item.url}}" alt="" width="150">
+          <h3>{{item.item_name}}</h3>
       </div>
     {% endfor %}
   {% endif %}

@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content%}
+
+<div class="container" id="collection">
+  <div class="row">
+    {% for post in products %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-title">
+          <p style="padding-top:20px;">{{post.name}}</p>
+        </div>
+
+        <div class="card-body">
+        {% if post.image %}
+        <img src="{{post.image.url}}" class="img-responsive" alt="Item"><br>
+        {% endif %}
+      </div>
+
+      <div class="card-footer">
+        <p>Price: ${{post.price}}</p>
+      </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <style>
+    h1,
+    p {
+      text-align: center;
+    }
+
+    img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      width: 250px;
+      height: 250px;
+    }
+
+    img:hover {
+      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+  </style>
+</div>
+{% endblock%}
