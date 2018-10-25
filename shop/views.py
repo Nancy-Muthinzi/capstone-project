@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Image
+from .models import Image, Blog
 from .forms import NewsLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -39,9 +39,12 @@ def shop(request):
 
 
 def contact(request):
-
     return render(request, 'contact.html')
 
+def blog(request):
+    blog = Blog.objects.all()
+    
+    return render(request, 'blog.html', {'blog':blog})
 
 def search_results(request):
 

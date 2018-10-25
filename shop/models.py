@@ -55,6 +55,15 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Blog(models.Model):
+    date = models.DateField()
+    image = models.ImageField(upload_to='blog/', blank=True)
+    title = models.CharField(max_length=100)
+    post = models.TextField()
+
+    def __str__(self):
+        return self.title
+
 class Cart(models.Model):
     user = models.ForeignKey(User)
     active = models.BooleanField(default=True)
@@ -91,12 +100,6 @@ class Cart(models.Model):
                 preexisting_order.delete()
         except JewelOrder.DoesNotExist:
             pass   
-
-class Blog(models.Model):
-    author = models.ForeignKey(User)
-    date = models.DateField()
-    title = models.CharField(max_length=100)
-    post = models.TextField()
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
