@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 
 class Profile(models.Model):
@@ -13,13 +14,24 @@ class Profile(models.Model):
     class Meta:
         ordering = ['names']
 
+class Category(models.Model):
+    name = models.CharField(max_length =25)
+
+    def save_category(self):
+        self.save()
+
+    def delete_category(self):
+        self.delete()    
+
+    def __str__(self):
+        return self.name
 
 class Image(models.Model):
-    id = models.AutoField(primary_key=True)
-    image = models.ImageField(upload_to='home/', blank=True)
-    name = models.CharField(max_length=50, blank=True)
-    description = models.TextField(max_length=75)
-    category = models.ManyToManyField('Category')
+    # id = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to='shop/')
+    name = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    category = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.name
@@ -42,18 +54,6 @@ class Image(models.Model):
     def get_image_by_id(cls, id):
         images = cls.objects.get(pk=id)
         return images
-
-class Category(models.Model):
-    name = models.CharField(max_length =25)
-
-    def save_category(self):
-        self.save()
-
-    def delete_category(self):
-        self.delete()    
-
-    def __str__(self):
-        return self.name
 
 class Blog(models.Model):
     date = models.DateField()

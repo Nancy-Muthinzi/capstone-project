@@ -1,18 +1,46 @@
 {%extends 'base.html'%}
 {% load bootstrap4 %}
+{% block content%}
+<div class="container" id="shop">
 
-<div class="container">
+  <!-- <nav style="font-size:20px;">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-necklaces-tab" data-toggle="tab" href="#nav-necklaces" role="tab"
+        aria-controls="nav-necklaces" aria-selected="true">Necklaces</a>
+      <a class="nav-item nav-link" id="nav-bracelets-tab" data-toggle="tab" href="#nav-bracelets" role="tab"
+        aria-controls="nav-bracelets" aria-selected="false">Bracelets</a>
+      <a class="nav-item nav-link" id="nav-rings-tab" data-toggle="tab" href="#nav-rings" role="tab" aria-controls="nav-rings"
+        aria-selected="false">Rings</a>
+      <a class="nav-item nav-link" id="nav-earrings-tab" data-toggle="tab" href="#nav-earrings" role="tab"
+        aria-controls="nav-earrings" aria-selected="false">Earrings</a>
+    </div>
+  </nav>
 
-  <!-- Some content here-->
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-necklaces" role="tabpanel" aria-labelledby="nav-necklaces-tab">
 
-  <div class="container-fluid">
+    </div>
+    <div class="tab-pane fade" id="nav-bracelets" role="tabpanel" aria-labelledby="nav-bracelets-tab">
+      ...
+    </div>
+    <div class="tab-pane fade" id="nav-rings" role="tabpanel" aria-labelledby="nav-rings-tab">
+      ...
+    </div>
+    <div class="tab-pane fade" id="nav-earrings" role="tabpanel" aria-labelledby="nav-earrings-tab">
+      ...
+    </div>
 
-    <form action="{%url 'shop'%}" method="post">
-      {%csrf_token%}
-
-      {% bootstrap_form letterForm layout='inline' %}
-      <input type="submit" value="Subscribe">
-    </form>
-
+  </div> -->
+<div class="row">
+  {% for post in images %}
+  <div class="col-md-4">
+    <p>{{post.name}}</p>
+    {% if post.image  %}
+    <img src="{{post.image.url}}" class="img-responsive" alt="Image" width="250" height="250"><br>
+    {% endif %}
   </div>
+    {% endfor %}
+  </div>
+
 </div>
+{% endblock%}

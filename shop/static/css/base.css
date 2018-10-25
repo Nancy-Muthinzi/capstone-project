@@ -1,5 +1,5 @@
 * {
-  font-family: "Pacifico", cursive;
+  font-family: 'Carter One', cursive;
 }
 body,
 html {
@@ -17,12 +17,17 @@ html {
 #about {
   text-align: center;
   color: floralwhite;
-  background-color: rosybrown;
+  background-color: black;
 }
 #blog {
   text-align: center;
   color: floralwhite;
-  background-color: rosybrown;
+  background-color: black;
+}
+#shop {
+  text-align: center;
+  color: floralwhite;
+  background-color: black;
 }
 input {
   outline: none;

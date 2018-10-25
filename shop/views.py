@@ -22,20 +22,9 @@ def about(request):
 
 # @login_required(login_url='/accounts/login/')
 def shop(request):
-    if request.method == 'POST':
-        form = NewsLetterForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['your_name']
-            email = form.cleaned_data['email']
-            recipient = NewsLetterRecipients(name=name, email=email)
-            recipient.save()
-            send_welcome_email(name, email)
+    images = Image.objects.all()
 
-            HttpResponseRedirect('shop')
-    else:
-        form = NewsLetterForm()
-
-    return render(request, 'shop.html', {'letterForm': form})
+    return render(request, 'shop.html', {'images':images})
 
 
 def contact(request):
