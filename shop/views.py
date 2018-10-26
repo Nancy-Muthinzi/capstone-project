@@ -49,18 +49,43 @@ def search_results(request):
         message = "You haven't made any searches"
         return render(request, 'search.html', {"message": message})
 
-def add_to_cart(request, product_id, quantity):
-    product = Product.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.add(product, product.unit_price, quantity)
+def index(request):
+    response = render_to_response('buylist/Home.html')
+    visits = int(request.COOKIES.get('visits', '0'))
+    if 'last_visit' in request.COOKIES:
+        last_visit = request.COOKIES['last_visit']
+        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+        if (datetime.now() - last_visit_time).days > 0:
+            response.set_cookie('visits', visits + 1)
+            response.set_cookie('last_visit', datetime.now())
+    else:
+        response.set_cookie('last_visit', datetime.now())
+    return response
 
-def remove_from_cart(request, product_id):
+def add_to_cart(request, product_id):
+    cart = request.session.get('cart', {})
     product = Product.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.remove(product)
+    cart[product_id] = product
+    request.session['cart'] = cart
+    return HttpResponseRedirect(reverse("cart"))
 
+def cart_update(request):
+    p = request.POST.get("product_id")
+    if p is not None:
+        product_obj = Product.objects.get(id =p)
+        c,n = Cart.objects.get_or_new(request)
+        if product_obj not in c.products.all():
+            c.products.add(product_obj)
+
+    else:
+        c.products.remove(product_obj)
+        print("to be added")
+
+    return redirect("cart:home")
+    
 def get_cart(request):
-    return render_to_response('cart.html', dict(cart=Cart(request)))
+    cart = request.session.get('cart',{})
+    return render(request, 'buylist/cart.html', cart)
 
 # def my_profile(request):
 #     my_user_profile = Profile.objects.filter(user=request.user).first()

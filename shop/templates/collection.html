@@ -3,8 +3,22 @@
 {% block content%}
 
 <div class="container" id="collection">
-  <div class="row">
 
+    {% for item in file %}
+    <tbody>
+      <tr>
+        <td>{{item.fields.Name}}</td>
+        <td>${{item.fields.Price}}</td>
+        <td>{{item.fields.Quantity}}</td>
+        <td>
+            <a href="http://127.0.0.1:8000/cart/{{item.id}}"><button>Add</button></a>      
+        </td>
+
+      </tr>
+    </tbody>
+{% endfor %}
+
+  <div class="row">
     <div class="container">
       {% for post in products %}
       <div class="col-md-4">

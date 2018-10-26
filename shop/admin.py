@@ -9,6 +9,8 @@ admin.site.register(Profile)
 admin.site.register(Blog)
 admin.site.register(Category)
 admin.site.register(Cart)
+# admin.site.register(CartManager)
+
 
 
 

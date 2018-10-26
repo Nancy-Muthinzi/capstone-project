@@ -1,18 +1,17 @@
-{% extends 'base.html' %}
+<h1>Your Cart</h1>
 
-{% block body %}
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-        </tr>
-        {% for item in cart %}
-        <tr>
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.total_price }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-{% endblock %}
+{% for a in cart.products.all %}
+<form action="{% url "cart:update" %}" method="POST">{% csrf_token %}
+
+<input type="hidden" name="product_id" value='{{a.id}}' placeholder="
+ {{a.id}}"/>
+
+<h4>Your Product: <a href= '{{ a.get_absolute_url}}'>{{a.title}}</a><small>
+<br><button type="submit">Remove?</button></small></h4>
+<p>Price :
+
+{{a.price}}</p>
+</form>
+{% endfor %}
+
+<b>Subtotal: {{cart.subtotal}}</b><br>
