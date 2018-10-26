@@ -18,20 +18,20 @@ html {
 #about {
   font-family: 'Carter One', cursive;
   text-align: center;
-  color: rosybrown;
-  /* background-color: black; */
+  color: black;
+  background-color: #549292;
 }
 #blog {
   font-family: 'Carter One', cursive;
   text-align: center;
   color: floralwhite;
-  background-color: rosybrown;
+  background-color: #549292;
 }
 #collection {
   text-align: center;
   font-size: 16px;
   color: black;
-  /* background-color: black; */
+  background-color: #549292;
 }
 input {
   outline: none;
