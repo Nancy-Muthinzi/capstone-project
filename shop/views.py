@@ -38,8 +38,8 @@ def blog(request):
 
 def search_results(request):
 
-    if 'item' in request.GET and request.GET["item"]:
-        search_term = request.GET.get("item")
+    if 'product' in request.GET and request.GET["product"]:
+        search_term = request.GET.get("product")
         searched_items = Item.search_by_category(search_term)
 
         message = f"{search_term}"
@@ -82,7 +82,7 @@ def cart_update(request):
         print("to be added")
 
     return redirect("cart:home")
-    
+
 def get_cart(request):
     cart = request.session.get('cart',{})
     return render(request, 'buylist/cart.html', cart)
