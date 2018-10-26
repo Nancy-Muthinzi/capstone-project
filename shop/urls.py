@@ -13,8 +13,7 @@ urlpatterns=[
     url('^blog/',views.blog,name='blog'),
     url('^contact/',views.contact,name='contact'),
     url(r'^search/', views.search_results, name='search_results'),
-
-    # url(r'^add/(\d+)', views.add_cart, name='add_cart'),  
+    # url(r'^cart/', views.cart, name='cart'),  
     # url(r'^remove/(\d+)', views.remove_cart, name='remove_cart'),
     # url(r'^cart/', views.cart, name='cart'),
 

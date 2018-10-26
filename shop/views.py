@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Product, Blog, Profile
+from .models import Product, Blog, Profile, Cart
 from .forms import NewsLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -49,6 +49,19 @@ def search_results(request):
         message = "You haven't made any searches"
         return render(request, 'search.html', {"message": message})
 
+def add_to_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    cart.add(product, product.unit_price, quantity)
+
+def remove_from_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    cart.remove(product)
+
+def get_cart(request):
+    return render_to_response('cart.html', dict(cart=Cart(request)))
+
 # def my_profile(request):
 #     my_user_profile = Profile.objects.filter(user=request.user).first()
 #     my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
@@ -74,27 +87,27 @@ def search_results(request):
 
 #     return render(request, 'product_list.html', context)
 
-@login_required(login_url='/accounts/login/')
-def add_cart(request,**kwargs):
-    jewel = get_object_or_404(Jewel, pk=jewel_id)
-    cart,created = Cart.objects.get_or_create(user=request.user, active=True)
-    order,created = JewelOrder.objects.get_or_create(jewel=jewel,cart=cart)
-    order.quantity += 1
-    order.save()
-    messages.success(request, "Cart updated!")
-    return redirect('cart')
+# @login_required(login_url='/accounts/login/')
+# def add_cart(request,**kwargs):
+#     jewel = get_object_or_404(Jewel, pk=jewel_id)
+#     cart,created = Cart.objects.get_or_create(user=request.user, active=True)
+#     order,created = JewelOrder.objects.get_or_create(jewel=jewel,cart=cart)
+#     order.quantity += 1
+#     order.save()
+#     messages.success(request, "Cart updated!")
+#     return redirect('cart')
 
 
-@login_required(login_url='/accounts/login/')
-def remove_cart(request, jewel_id):
-    if request.user.is_authenticated():
-        try:
-            jewel = Jewel.objects.get(pk=jewel_id)
-        except ObjectDoesNotExist:
-            pass
-        else:
-            cart = Cart.objects.get(user=request.user, active=True)
-            cart.remove_cart(jewel_id)
-        return redirect('cart')
-    else:
-        return redirect('collection')
+# @login_required(login_url='/accounts/login/')
+# def remove_cart(request, jewel_id):
+#     if request.user.is_authenticated():
+#         try:
+#             jewel = Jewel.objects.get(pk=jewel_id)
+#         except ObjectDoesNotExist:
+#             pass
+#         else:
+#             cart = Cart.objects.get(user=request.user, active=True)
+#             cart.remove_cart(jewel_id)
+#         return redirect('cart')
+#     else:
+#         return redirect('collection')

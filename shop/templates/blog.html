@@ -8,6 +8,7 @@
     {% for blog_item in blog %}
 
     <div class="row">
+        <div class="col-md-3"></div>
         <!-- displaying blog items -->
         <div class="col-md-6">
             <h2> {{ blog_item.title }} </h2>
@@ -16,8 +17,10 @@
                 <img src="{{blog_item.image.url}}" class="img-responsive" alt="Image" width="450" height="450"><br>
                 {{blog_item.post}}
 
-            </section>
+            </section><br>
+            <hr>
         </div>
+        <div class="col-md-3"></div>
 
         {% empty %}
         <div class="row">

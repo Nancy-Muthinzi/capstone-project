@@ -1,5 +1,5 @@
-* {
-  font-family: 'Carter One', cursive;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pacifico', cursive;
 }
 body,
 html {
@@ -7,6 +7,7 @@ html {
   margin: 0;
 }
 #home {
+  font-family: 'Carter One', cursive;
   background: url("/static/images/bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -15,14 +16,16 @@ html {
   height: 600px;
 }
 #about {
+  font-family: 'Carter One', cursive;
   text-align: center;
   color: rosybrown;
   /* background-color: black; */
 }
 #blog {
+  font-family: 'Carter One', cursive;
   text-align: center;
   color: floralwhite;
-  background-color: black;
+  background-color: rosybrown;
 }
 #collection {
   text-align: center;
@@ -82,7 +85,7 @@ input::-webkit-input-placeholder {
   bottom: 0;
   width: 100%;
   background-color: lightgrey;
-  color: white;
+  color: black;
   text-align: center;
 }
 .fa {
