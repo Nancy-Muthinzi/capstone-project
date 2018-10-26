@@ -43,7 +43,7 @@ def search_results(request):
         searched_items = Item.search_by_category(search_term)
 
         message = f"{search_term}"
-        return render(request, 'search.html', {"message": message, "items": searched_items})
+        return render(request, 'search.html', {"message": message, "products": searched_items})
 
     else:
         message = "You haven't made any searches"
